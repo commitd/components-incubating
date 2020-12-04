@@ -8,10 +8,10 @@
 </p>
 
 [![Committed Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fcommitted.software%2Fbadge)](https://committed.io)
-[![Build Status](https://drone.committed.software/api/badges/commitd/template-ts-lib/status.svg)](https://drone.committed.software/commitd/template-ts-lib)
+![Build Status](https://github.com/commitd/template-ts-lib/workflows/build/badge.svg?branch=main)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=commitd_template-ts-lib&metric=alert_status&token=aa002ca75e2f3a6d028af9074bceeda1ffa2f9f7)](https://sonarcloud.io/dashboard?id=commitd_template-ts-lib)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=commitd_template-ts-lib&metric=coverage&token=aa002ca75e2f3a6d028af9074bceeda1ffa2f9f7)](https://sonarcloud.io/dashboard?id=commitd_template-ts-lib)
 ![GitHub repo size](https://img.shields.io/github/repo-size/commitd/template-ts-lib)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=io.committed.template-ts-lib%3Atemplate-ts-lib&metric=alert_status&token=0940622ec61c644fe85982cffa3d902a6b110d20)](https://sonarcloud.io/dashboard?id=io.committed.template-ts-lib%3Atemplate-ts-lib)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=io.committed.template-ts-lib%3Atemplate&metric=coverage&token=0940622ec61c644fe85982cffa3d902a6b110d20)](https://sonarcloud.io/dashboard?id=io.committed.template%3Atemplate-ts-lib)
 
 The Template project aims to standardize the set up of Committed projects and ensure good practice. Best practice changes and improvements should be put back into the template through PRs. The main branch covers the standard Spring Boot server and React UI case.
 
@@ -24,7 +24,7 @@ TSDX scaffolds your new library inside `/src`, and also sets up a [Parcel-based]
 The recommended workflow is to run TSDX in one terminal:
 
 ```bash
-npm start # or yarn start
+yarn start
 ```
 
 This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
@@ -49,15 +49,15 @@ Then run the example inside another:
 
 ```bash
 cd example
-npm i # or yarn to install dependencies
-npm start # or yarn start
+yarn install
+yarn start
 ```
 
 The default example imports and live reloads whatever is in `/dist`, so if you are seeing an out of date component, make sure TSDX is running in watch mode like we recommend above. **No symlinking required**, we use [Parcel's aliasing](https://parceljs.org/module_resolution.html#aliases).
 
-To do a one-off build, use `npm run build` or `yarn build`.
+To do a one-off build, use `yarn build`.
 
-To run tests, use `npm test` or `yarn test`.
+To run tests, use `yarn test`.
 
 ## Configuration
 
@@ -65,11 +65,11 @@ Code quality is set up for you with `prettier`, `husky`, and `lint-staged`. Adju
 
 ### Jest
 
-Jest tests are set up to run with `npm test` or `yarn test` and `testing-library`.
+Jest tests are set up to run with `yarn test` and `testing-library`.
 
 ### Bundle analysis
 
-Calculates the real cost of your library using [size-limit](https://github.com/ai/size-limit) with `npm run size` and visulize it with `npm run analyze`.
+Calculates the real cost of your library using [size-limit](https://github.com/ai/size-limit) with `yarn size` and visulize it with `yarn analyze`.
 
 #### Setup Files
 
@@ -84,6 +84,7 @@ This is the folder structure we set up for you:
 /src
   index.tsx       # EDIT THIS
   /components
+  /hooks
 /.storybook
   main.js
   preview.js
@@ -91,6 +92,14 @@ This is the folder structure we set up for you:
 package.json
 README.md         # EDIT THIS
 tsconfig.json
+```
+
+### Generators
+
+There are generators for components and hook these can be used to create the boilerplate files with:
+
+```bash
+yarn generate
 ```
 
 #### React Testing Library
@@ -111,18 +120,15 @@ TSDX uses [Rollup](https://rollupjs.org) as a bundler and generates multiple rol
 
 Two actions are added by default:
 
-- `main` which installs deps w/ cache, lints, tests, and builds on all pushes against a Node and OS matrix
+- `build` which installs deps w/ cache, lints, tests, and builds.
+- `release` Triggered on release with (commented) options to publish and deploy storybook
 - `size` which comments cost comparison of your library on every pull request using [size-limit](https://github.com/ai/size-limit)
 
-### Drone
+You need to configure sonarcloud separately to analyse the project.
 
-Example drone configuration with steps for
-
-- **npm authentication** for later publication with npm
-- **build** the main library
-- **publish** to npm
-- **code-analysis** with sonar
-- **announce** with slack
+- Allow access on [github](https://github.com/organizations/commitd/settings/installations/)
+- Add the project on [sonarcloud](https://sonarcloud.io/projects/create)
+- Turn off the automated analysis in the sonorcloud settings.
 
 ## Optimizations
 
@@ -177,23 +183,4 @@ For vanilla CSS, you can include it at the root directory and add it to the `fil
 
 ## Publishing to NPM
 
-We recommend using [np](https://github.com/sindresorhus/np).
-
-## Usage with Lerna
-
-When creating a new package with TSDX within a project set up with Lerna, you might encounter a `Cannot resolve dependency` error when trying to run the `example` project. To fix that you will need to make changes to the `package.json` file _inside the `example` directory_.
-
-The problem is that due to the nature of how dependencies are installed in Lerna projects, the aliases in the example project's `package.json` might not point to the right place, as those dependencies might have been installed in the root of your Lerna project.
-
-Change the `alias` to point to where those packages are actually installed. This depends on the directory structure of your Lerna project, so the actual path might be different from the diff below.
-
-```diff
-   "alias": {
--    "react": "../node_modules/react",
--    "react-dom": "../node_modules/react-dom"
-+    "react": "../../../node_modules/react",
-+    "react-dom": "../../../node_modules/react-dom"
-   },
-```
-
-An alternative to fixing this problem would be to remove aliases altogether and define the dependencies referenced as aliases as dev dependencies instead. [However, that might cause other problems.](https://github.com/palmerhq/tsdx/issues/64)
+See `.github/workflows/release.yml`.

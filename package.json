@@ -5,7 +5,7 @@
   "author": "Committed",
   "license": "MIT",
   "private": false,
-  "repository": "git://github.com/commitd/components.git",
+  "repository": "git://github.com/commitd/template-ts-lib.git",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "publishConfig": {
@@ -27,7 +27,7 @@
     "size": "size-limit",
     "analyze": "size-limit --why",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "build-storybook": "build-storybook --no-dll",
     "format": "prettier --write '**/{src,test,stories}/**/{*.js,*.ts,*.tsx,*.json,*.md,*.mdx}' example/index.tsx",
     "deploy-storybook": "storybook-to-ghpages",
     "generate": "plop --plopfile ./generators/plopfile.js"
@@ -56,14 +56,25 @@
       "limit": "10 KB"
     }
   ],
+  "jest": {
+    "testEnvironment": "jsdom",
+    "collectCoverage": true,
+    "testResultsProcessor": "jest-sonar-reporter",
+    "coveragePathIgnorePatterns": [
+      "setupTests.tsx",
+      ".*/index.ts",
+      ".*.test.ts",
+      ".*.stories.tsx"
+    ]
+  },
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@size-limit/preset-small-lib": "^4.6.2",
-    "@storybook/addon-essentials": "^6.0.27",
+    "@storybook/addon-essentials": "^6.0.28",
     "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-links": "^6.0.27",
-    "@storybook/addons": "^6.0.27",
-    "@storybook/react": "^6.0.27",
+    "@storybook/addon-links": "^6.0.28",
+    "@storybook/addons": "^6.0.28",
+    "@storybook/react": "^6.0.28",
     "@storybook/storybook-deployer": "^2.8.7",
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.0",
@@ -76,12 +87,14 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-security": "^1.4.0",
     "husky": "^4.3.0",
+    "jest-sonar-reporter": "^2.0.0",
     "plop": "^2.7.4",
     "prettier": "^2.1.2",
     "pretty-quick": "^3.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-is": "^17.0.1",
+    "react-test-renderer": "^17.0.1",
     "shx": "^0.3.2",
     "size-limit": "^4.6.2",
     "tsdx": "^0.14.1",
