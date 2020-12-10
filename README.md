@@ -9,7 +9,7 @@
 
 [![Committed Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fcommitted.software%2Fbadge)](https://committed.io)
 ![Build Status](https://github.com/commitd/components-incubating/workflows/build/badge.svg?branch=main)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=commitd_components-incubating&metric=alert_status&token=aa002ca75e2f3a6d028af9074bceeda1ffa2f9f7)](https://sonarcloud.io/dashboard?id=commitd_template-ts-lib)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=commitd_components-incubating&metric=alert_status&token=aa002ca75e2f3a6d028af9074bceeda1ffa2f9f7)](https://sonarcloud.io/dashboard?id=commitd_components-incubating)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=commitd_components-incubating&metric=coverage&token=aa002ca75e2f3a6d028af9074bceeda1ffa2f9f7)](https://sonarcloud.io/dashboard?id=commitd_components-incubating)
 ![GitHub repo size](https://img.shields.io/github/repo-size/commitd/template-ts-lib)
 
