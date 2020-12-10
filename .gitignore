@@ -28,3 +28,8 @@ yarn-error.log*
 
 .docz
 .vscode
+storybook-static
+
+# test artifacts
+coverage
+test-report.xml
