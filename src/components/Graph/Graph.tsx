@@ -1,12 +1,14 @@
-import { Box, makeStyles } from '@committed/components'
+import { Box, BoxProps, makeStyles } from '@committed/components'
 import React from 'react'
 import { GraphModel } from '../../graph/GraphModel'
 import { GraphRenderer } from '../../graph/types'
 
-export type GraphProps = {
+export interface GraphProps extends BoxProps {
   renderer: GraphRenderer
   model: GraphModel
-  onChange?: (model: GraphModel | ((model2: GraphModel) => GraphModel)) => void
+  onModelChange?: (
+    model: GraphModel | ((model2: GraphModel) => GraphModel)
+  ) => void
 }
 
 const useStyles = makeStyles({
@@ -18,10 +20,12 @@ const useStyles = makeStyles({
 export const Graph: React.FC<GraphProps> = ({
   renderer,
   model,
-  onChange = () => {
+  onModelChange = () => {
     // do nothing by default
   },
 }) => {
   const classes = useStyles()
-  return <Box className={classes.container}>{renderer(model, onChange)}</Box>
+  return (
+    <Box className={classes.container}>{renderer(model, onModelChange)}</Box>
+  )
 }

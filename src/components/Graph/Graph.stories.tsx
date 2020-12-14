@@ -35,7 +35,11 @@ export const Sandbox: React.FC = () => {
           onReset={() => setModel(exampleModel)}
         />
       </Box>
-      <Graph model={model} onChange={setModel} renderer={CytoscapeRenderer} />
+      <Graph
+        model={model}
+        onModelChange={setModel}
+        renderer={CytoscapeRenderer}
+      />
     </ThemeProvider>
   )
 }
@@ -44,7 +48,11 @@ export const ForceDirectedLayout: React.FC = () => {
   const [model, setModel] = useState(exampleModel)
   return (
     <ThemeProvider>
-      <Graph model={model} onChange={setModel} renderer={CytoscapeRenderer} />
+      <Graph
+        model={model}
+        onModelChange={setModel}
+        renderer={CytoscapeRenderer}
+      />
     </ThemeProvider>
   )
 }
@@ -58,7 +66,11 @@ export const CircleLayout: React.FC = () => {
   )
   return (
     <ThemeProvider>
-      <Graph model={model} onChange={setModel} renderer={CytoscapeRenderer} />
+      <Graph
+        model={model}
+        onModelChange={setModel}
+        renderer={CytoscapeRenderer}
+      />
     </ThemeProvider>
   )
 }
@@ -72,7 +84,11 @@ export const ColaForceDirectedLayout: React.FC = () => {
   )
   return (
     <ThemeProvider>
-      <Graph model={model} onChange={setModel} renderer={CytoscapeRenderer} />
+      <Graph
+        model={model}
+        onModelChange={setModel}
+        renderer={CytoscapeRenderer}
+      />
     </ThemeProvider>
   )
 }
@@ -86,7 +102,11 @@ export const GridLayout: React.FC = () => {
   )
   return (
     <ThemeProvider>
-      <Graph model={model} onChange={setModel} renderer={CytoscapeRenderer} />
+      <Graph
+        model={model}
+        onModelChange={setModel}
+        renderer={CytoscapeRenderer}
+      />
     </ThemeProvider>
   )
 }
@@ -97,7 +117,11 @@ export const NodeShapes: React.FC = () => {
   )
   return (
     <ThemeProvider>
-      <Graph model={model} onChange={setModel} renderer={CytoscapeRenderer} />
+      <Graph
+        model={model}
+        onModelChange={setModel}
+        renderer={CytoscapeRenderer}
+      />
     </ThemeProvider>
   )
 }
@@ -108,7 +132,11 @@ export const NodeColors: React.FC = () => {
   )
   return (
     <ThemeProvider>
-      <Graph model={model} onChange={setModel} renderer={CytoscapeRenderer} />
+      <Graph
+        model={model}
+        onModelChange={setModel}
+        renderer={CytoscapeRenderer}
+      />
     </ThemeProvider>
   )
 }
@@ -216,7 +244,11 @@ export const CustomIcons: React.FC = () => {
   )
   return (
     <ThemeProvider>
-      <Graph model={model} onChange={setModel} renderer={CytoscapeRenderer} />
+      <Graph
+        model={model}
+        onModelChange={setModel}
+        renderer={CytoscapeRenderer}
+      />
     </ThemeProvider>
   )
 }
@@ -244,14 +276,20 @@ export const CustomLayout: React.FC = () => {
   )
   return (
     <ThemeProvider>
-      <Graph model={model} onChange={setModel} renderer={CytoscapeRenderer} />
+      <Graph
+        model={model}
+        onModelChange={setModel}
+        renderer={CytoscapeRenderer}
+      />
     </ThemeProvider>
   )
 }
 
 export const CustomRenderer: React.FC = () => {
   const [model, setModel] = useState(GraphModel.createEmpty())
-  return <Graph model={model} onChange={setModel} renderer={ExampleRenderer} />
+  return (
+    <Graph model={model} onModelChange={setModel} renderer={ExampleRenderer} />
+  )
 }
 
 export const LargeGraph: React.FC = () => {
@@ -268,7 +306,11 @@ export const LargeGraph: React.FC = () => {
   )
   return (
     <ThemeProvider>
-      <Graph model={model} onChange={setModel} renderer={CytoscapeRenderer} />
+      <Graph
+        model={model}
+        onModelChange={setModel}
+        renderer={CytoscapeRenderer}
+      />
     </ThemeProvider>
   )
 }

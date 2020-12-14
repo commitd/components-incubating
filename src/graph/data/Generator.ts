@@ -3,18 +3,21 @@ import { DecoratedNode, DecoratedEdge, NodeShape, ModelNode } from '../types'
 import { names } from './names'
 import { shapes } from './shapes'
 
+const randomItem = <T>(arr: T[]): T =>
+  arr[Math.floor(Math.random() * arr.length)]
+
 export const randomNode = (model: GraphModel): DecoratedNode | undefined => {
   if (model.nodes.length === 0) {
     return
   }
-  return model.nodes[Math.floor(Math.random() * model.nodes.length)]
+  return randomItem(model.nodes)
 }
 
 const randomEdge = (model: GraphModel): DecoratedEdge | undefined => {
   if (model.edges.length === 0) {
     return
   }
-  return model.edges[Math.floor(Math.random() * model.edges.length)]
+  return randomItem(model.edges)
 }
 
 const randomColor = (): string => {
@@ -27,17 +30,15 @@ const randomColor = (): string => {
     '#43aa8b',
     '#577590',
   ]
-  return colors[Math.floor(Math.random() * colors.length)]
+  return randomItem(colors)
 }
 
 const randomShape = (): string => {
   return shapes[Math.floor(Math.random() * shapes.length)]
 }
 
-const randomName = () => {
-  return `${names[Math.floor(Math.random() * names.length)]} ${
-    names[Math.floor(Math.random() * names.length)]
-  }`
+const randomName = (): string => {
+  return `${randomItem(names)} ${randomItem(names)}`
 }
 
 export const addRandomNode = (
