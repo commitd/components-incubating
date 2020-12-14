@@ -40,9 +40,9 @@ export class DecoratorModel {
 
   static createDefault(): DecoratorModel {
     return new DecoratorModel(
-      [DecoratorModel.idAsLabelNode],
+      [],
       DecoratorModel.DEFAULT_NODE_DECORATION,
-      [DecoratorModel.idAsLabelNodeEdge],
+      [],
       DecoratorModel.DEFAULT_EDGE_DECORATION
     )
   }
@@ -59,15 +59,37 @@ export class DecoratorModel {
     this.edgeDefaults = edgeDefaults
   }
 
+  /**
+   * Get the decoration that is applied to all nodes, before anything is overridden by decorators
+   *
+   * Use this to apply blanket styling to nodes to minimise the performance impact of per-node styling
+   */
+  getNodeDefaults(): NodeDecoration {
+    return this.nodeDefaults
+  }
+
+  getEdgeDefaults(): EdgeDecoration {
+    return this.edgeDefaults
+  }
+
+  getNodeDectorationOverrides(node: ModelNode): Partial<NodeDecoration> {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { id, attributes, ...nodeStyle } = node
+    const decor = Object.assign(
+      {},
+      ...this.nodeDecorators.map((d) => d(node))
+    ) as Partial<NodeDecoration>
+    return {
+      ...decor,
+      ...nodeStyle,
+    }
+  }
+
   getDecoratedNodes(modelNodes: ModelNode[]): DecoratedNode[] {
     return Object.values(modelNodes).map((node) => {
-      const decor = Object.assign(
-        {},
-        ...this.nodeDecorators.map((d) => d(node))
-      ) as Partial<NodeDecoration>
       return {
         ...this.nodeDefaults,
-        ...decor,
+        ...this.getNodeDectorationOverrides(node),
         ...node,
       }
     })
